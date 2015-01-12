@@ -1,2 +1,8 @@
 ---
-# handlers file for zabbix
+- name: initialize zabbix database
+  shell: mysql {{ zabbix_server_db_name }} < {{ zabbix_server_db_schema_dir }}{{ item }}
+  with_items:
+      - schema.sql
+      - images.sql
+      - data.sql
+

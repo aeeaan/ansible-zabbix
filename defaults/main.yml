@@ -1,2 +1,6 @@
 ---
-# defaults file for zabbix
+zabbix_server_db_hostname    : 'localhost'
+zabbix_server_db_name        : "zabbix"
+zabbix_server_db_user        : "zabbix"
+zabbix_server_db_pass        : "testzabbix"
+zabbix_server_db_schema_dir  : "/usr/share/doc/zabbix-server-mysql-2.4.3/create/"

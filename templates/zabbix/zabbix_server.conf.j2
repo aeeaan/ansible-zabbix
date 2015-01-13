@@ -71,6 +71,8 @@ PidFile=/var/run/zabbix/zabbix_server.pid
 # Default:
 # DBHost=localhost
 
+DBHost={{ zabbix_server_db_hostname }}
+
 ### Option: DBName
 #	Database name.
 #	For SQLite3 path to database file must be provided. DBUser and DBPassword are ignored.
@@ -79,7 +81,7 @@ PidFile=/var/run/zabbix/zabbix_server.pid
 # Default:
 # DBName=
 
-DBName=zabbix
+DBName={{ zabbix_server_db_name }}
 
 ### Option: DBSchema
 #	Schema name. Used for IBM DB2 and PostgreSQL.
@@ -95,7 +97,7 @@ DBName=zabbix
 # Default:
 # DBUser=
 
-DBUser=zabbix
+DBUser={{ zabbix_server_db_user }}
 
 ### Option: DBPassword
 #	Database password. Ignored for SQLite.
@@ -104,6 +106,8 @@ DBUser=zabbix
 # Mandatory: no
 # Default:
 # DBPassword=
+
+DBPassword={{ zabbix_server_db_pass }}
 
 ### Option: DBSocket
 #	Path to MySQL socket.
@@ -121,6 +125,8 @@ DBSocket=/var/lib/mysql/mysql.sock
 # Range: 1024-65535
 # Default (for MySQL):
 # DBPort=3306
+
+DBPort={{ zabbix_server_db_port }}
 
 ############ ADVANCED PARAMETERS ################
 

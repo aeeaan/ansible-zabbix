@@ -22,8 +22,8 @@
    - ::1
    - localhost
 
-- name: disable selinux
-  selinux: policy=targeted state=permissive
+- name: enable selinux
+  selinux: policy=targeted state=enforcing
 
 - name: install zabbix server
   yum: name=zabbix state=present
@@ -73,3 +73,7 @@
       - https
   when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7
   notify: restart firewalld
+
+- name: allow httpd network connect
+  seboolean: name=httpd_can_network_connect state=yes persistent=yes
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7

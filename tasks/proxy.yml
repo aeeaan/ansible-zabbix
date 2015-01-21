@@ -1,0 +1,4 @@
+---
+- name: install zabbix proxy mysql
+  yum: name=zabbix-proxy-mysql state=present
+

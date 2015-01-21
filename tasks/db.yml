@@ -1,0 +1,11 @@
+---
+- name: create db
+  mysql_db: name=zabbix state=present encoding=utf8
+  notify: initialize zabbix database
+
+- name: create db user
+  mysql_user: name={{ zabbix_server_db_user }} host={{ item }} password={{ zabbix_server_db_pass }} login_host={{ zabbix_server_db_hostname }} priv={{ zabbix_server_db_name }}.*:ALL
+  with_items:
+   - 127.0.0.1
+   - ::1
+   - localhost

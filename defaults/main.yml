@@ -1,4 +1,10 @@
 ---
+#installs
+zabbix_server_install: false
+zabbix_frontend_install: false
+zabbix_proxy_install: false
+zabbix_agent_install: true
+
 #db info
 zabbix_server_db_hostname: "localhost"
 zabbix_server_db_port: "3306"

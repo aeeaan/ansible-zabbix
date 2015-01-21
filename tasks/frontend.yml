@@ -1,0 +1,27 @@
+---
+- name: install zabbix frontend
+  yum: name=zabbix-web-mysql state=present
+
+- name: configure zabbix frontend
+  template: src=zabbix/web/zabbix.conf.php.j2 dest=/etc/zabbix/web/zabbix.conf.php owner=apache group=apache mode=0644
+  notify: restart httpd
+
+- name: configure apache for zabbix
+  template: src={{ item }} dest=/etc/httpd/conf.d/zabbix.conf owner=root group=root mode=0644
+  with_first_found:
+    - "../templates/httpd/zabbix.conf.{{ ansible_os_family }}{{ ansible_distribution_major_version }}.j2"
+    - ../templates/httpd/zabbix.conf.j2
+  when: ansible_os_family == 'RedHat'
+  notify: restart httpd
+
+- name: enable web ports
+  firewalld: service={{item}} permanent=true state=enabled
+  with_items:
+      - http
+      - https
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7
+  notify: restart firewalld
+
+- name: allow httpd network connect
+  seboolean: name=httpd_can_network_connect state=yes persistent=yes
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7

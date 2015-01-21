@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+A role for installing zabbix server or zabbix agent. Please note that at this time, the proxy install is just a placeholder. Also, this won't work if zabbix_frontend_install is true without zabbix_server_install also being true. Separate installs are not supported at this time. Only agent is installed by default.
 
 Requirements
 ------------
@@ -16,7 +16,8 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- httpd
+- mysql
 
 Example Playbook
 ----------------

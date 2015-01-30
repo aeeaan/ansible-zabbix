@@ -1,7 +1,23 @@
 ---
-- name: install zabbix repo rpm
-  yum: name=http://repo.zabbix.com/zabbix/2.4/rhel/7/x86_64/zabbix-release-2.4-1.el7.noarch.rpm state=present
-  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7
+- name: install zabbix repo key
+  rpm_key: key=http://repo.zabbix.com/RPM-GPG-KEY-ZABBIX state=present
+  when: ansible_os_family == 'RedHat'
+
+- name: check zabbix repo existence
+  stat: path=/etc/yum.repos.d/zabbix.repo
+  register: zabbix_repo
+  when: ansible_os_family == 'RedHat'
+
+- name: bootstrap zabbix repo
+  template: src=zabbix.repo.j2 dest=/etc/yum.repos.d/zabbix-bootstrap.repo owner=root group=root mode=0644
+  when: ansible_os_family == 'RedHat' and zabbix_repo.stat.exists == False
+
+- name: install zabbix-release
+  yum: pkg=zabbix-release state=latest
+  when: ansible_os_family == 'RedHat'
+
+- name: remove bootstrap zabbix file
+  file: path=/etc/yum.repos.d/zabbix-bootstrap.repo state=absent
 
 - name: create zabbix group
   group: name=zabbix gid=130 state=present

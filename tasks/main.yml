@@ -10,7 +10,7 @@
 
 - name: bootstrap zabbix repo
   template: src=zabbix.repo.j2 dest=/etc/yum.repos.d/zabbix-bootstrap.repo owner=root group=root mode=0644
-  when: ansible_os_family == 'RedHat' and zabbix_repo.stat.exists == False
+  when: ansible_os_family == 'RedHat' and zabbix_repo.stat.exists == false
 
 - name: install zabbix-release
   yum: pkg=zabbix-release state=latest

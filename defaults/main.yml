@@ -5,6 +5,9 @@ zabbix_frontend_install: false
 zabbix_proxy_install: false
 zabbix_agent_install: true
 
+#List of comma delimited IP addresses (or hostnames) of Zabbix servers
+zabbix_server_ips: 127.0.0.1
+
 #db info
 zabbix_server_db_hostname: "localhost"
 zabbix_server_db_port: "3306"

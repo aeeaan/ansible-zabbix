@@ -25,9 +25,6 @@
 - name: create zabbix user
   user: name=zabbix uid=130 group=zabbix comment="Zabbix Monitoring System" home=/var/lib/zabbix shell=/sbin/nologin state=present
 
-- name: ensure time zone is set
-  ini_file: dest=/etc/php.ini section="Date" option="date.timezone" value="America/New_York"
-
 - name: enable selinux
   selinux: policy=targeted state=enforcing
 

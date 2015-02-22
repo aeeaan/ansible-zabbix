@@ -2,4 +2,5 @@
 dependencies:
   - { role: common }
   - { role: httpd }
+  - { role: php }
   - { role: mysql }

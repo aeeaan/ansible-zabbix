@@ -3,30 +3,37 @@ Role Name
 
 A role for installing zabbix server or zabbix agent. Please note that at this time, the proxy install is just a placeholder. Also, this won't work if zabbix_frontend_install is true without zabbix_server_install also being true. Separate installs are not supported at this time. Only agent is installed by default.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Variable			| Default						| Notes				|
+| :---				| :---							| :---				|
+| zabbix_server_install		| false							| 				|
+| zabbix_frontend_install	| false							|				|
+| zabbix_proxy_install		| false							|				|
+| zabbix_agent_install		| true							|				|
+| zabbix_server_ips		| 127.0.0.1						|				|
+| zabbix_server_db_hostname	| "localhost"						|				|
+| zabbix_server_db_port		| "3306"						|				|
+| zabbix_server_db_name		| "zabbix"						|				|
+| zabbix_server_db_user		| "zabbix"						|				|
+| zabbix_server_db_pass		| "testzabbix"						|				|
+| zabbix_server_db_schema_dir	| "/usr/share/doc/zabbix-server-mysql-2.4.3/create/"	|				|
+| zabbix_frontend_require_ssl	| true
 
 Dependencies
 ------------
 
-- httpd
-- mysql
+- correcthorse.common
+- correcthorse.httpd
+- correcthorse.php
+- correcthorse.mysql
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: correcthorse.zabbix }
 
 License
 -------

@@ -1,6 +1,18 @@
 ---
+galaxy_info:
+  author: Joshua Rusch
+  description: 
+  company:
+  license: MIT
+  min_ansible_version: 1.9.1
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  categories:
+  - monitoring
 dependencies:
-  - { role: common }
-  - { role: httpd }
-  - { role: php }
-  - { role: mysql }
+  - { role: correcthorse.common }
+  - { role: correcthorse.httpd }
+  - { role: correcthorse.php }
+  - { role: correcthorse.mysql }
